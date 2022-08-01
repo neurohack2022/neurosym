@@ -351,7 +351,7 @@ class graph_win(QWidget):
             self.curves_eeg[count].setData(data[channel].tolist())
             neuroEnv.ab_result = self.ab_hist
         
-        self.qq.put(self.ab_hist[0,-1])
+        self.qq.put(np.mean(self.ab_hist))
             # print("root")
             # print(self.ab_hist)
             # save_ab_csv(self.ab_hist[1,-1], "value")

@@ -25,7 +25,7 @@ Rewards = [-1,1]
 class Conducter():
 
     def __init__(self, buckets=(2,20), 
-                num_episodes=10, min_lr=0.1, 
+                num_episodes=50, min_lr=0.1, 
                 min_epsilon=0.1, discount=1.0, decay=25):
         self.buckets = buckets
         self.num_episodes = num_episodes
@@ -96,7 +96,7 @@ class Conducter():
 
         for e in range(self.num_episodes):
             # Initializes the state
-            current_state = np.random.choice(stateSpace, 1)[0] 
+            # current_state = np.random.choice(stateSpace, 1)[0] 
             abState=qq.get()
             print("abState")
             print(abState)
@@ -114,7 +114,7 @@ class Conducter():
             timesteps=0
             
             # Looping for each step
-            while not done and timesteps<2:
+            while not done:
                 timesteps+=1
                 self.steps[e] += 1
                 # Choose A from S
@@ -143,7 +143,7 @@ class Conducter():
 
 
                     print(slideroffset)
-                    ac.move_to_element(slider).move_by_offset(0,slideroffset[sliderno]).click().perform()
+                    ac.move_to_element(slider).move_by_offset(0,int(slideroffset[sliderno])).click().perform()
                     print("move")
                     print("episode")
                     print(e)
@@ -176,10 +176,11 @@ class Conducter():
                 # Update Q(S,A)
                 self.update_q(current_state, action, reward, new_state)
                 current_state = new_state
-                if self.steps[e] > 100:
+                if self.steps[e] > 25:
                     break
                 # We break out of the loop when done is False which is
                 # a terminal state.
+        np.savetxt('qTable.csv', self.Q_table, delimiter=',') 
         print('Finished training!')
 
     def plot_learning(self):
