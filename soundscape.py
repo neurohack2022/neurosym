@@ -3,6 +3,8 @@ from agent import Conducter
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import threading
+from tkinter import *
+from functools import partial
 
 
 class soundscape:
@@ -34,11 +36,27 @@ class soundscape:
 
             ac.move_to_element(slider).move_by_offset(0,0).click().perform()
 
+        win = Tk()
+        win.geometry("1000x1000")
+        button1 =  Button(win, text="Train", command=partial(soundscape.train,driver,qq),height = 20,width = 40)
+        #put on screen
+        button1.pack()
+        button2 =  Button(win, text="Run", command=partial(soundscape.run,driver,qq),height = 20,width = 40)
+        #put on screen
+        button2.pack()
+        win.mainloop()
+        
+        
 
-
+    def train(driver,qq):
         agent = Conducter()
         agent.train(driver,qq)
         agent.plot_learning()
+    
+    def run(driver,qq):
+        agent = Conducter()
+        agent.run(driver,qq)
+
 
 if __name__ == '__main__':
     soundscape().main()

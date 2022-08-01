@@ -148,7 +148,7 @@ class Conducter():
                     print("episode")
                     print(e)
                     print("timestep")
-                    print(timesteps)
+                    print(timesteps) 
 
                     # print(abData)
                 time.sleep(2)
@@ -202,5 +202,66 @@ class Conducter():
     def selectRandomAction(self):
 
         return np.random.choice(actionSpace, 1)[0]
+
+    def run(self,driver,qq):
+        """Runs an episode while displaying the cartpole environment."""
+        t = 0
+        done = False
+        self.epsilon = 0.5
+        abState=qq.get()
+        print("abState")
+        print(abState)
+        if abState > 0.7:
+            current_state=1
+        else:
+            current_state=0
+        while not done:
+                t = t+1
+                action = self.choose_action(current_state)
+                if(action !=20):
+                    print("action")
+                    print(action)
+                    sliderno=action%10
+                    increase=int(action / 10)
+                    # print("sliderno")
+                    # print(sliderno)
+                    # print("increase")
+                    # print(increase)
+                    # Take action
+                    # obs, reward, done, _ = self.env.step(action)
+                    slider=driver.find_element("id", "s"+str(sliderno))
+                    ac = ActionChains(driver)
+                    if(increase):
+                        slideroffset[sliderno]-=20
+                        if(slideroffset[sliderno]<=-50):
+                            slideroffset[sliderno]= -50                       
+                    else:
+                        slideroffset[sliderno]+=20
+                        if(slideroffset[sliderno]>=50):
+                            slideroffset[sliderno]=50                      
+
+
+                    print(slideroffset)
+                    ac.move_to_element(slider).move_by_offset(0,int(slideroffset[sliderno])).click().perform()
+                    # print("move")
+                    
+                abState=qq.get()
+                print("abState")
+                print(abState)
+                if abState > 0.7:
+                    new_state=1
+                    reward = 1
+                else:
+                    new_state=0
+                    reward = -1
+                # new_state = np.random.choice(stateSpace,1)[0]
+                # reward = 1
+                
+                
+                # done = new_state == 0
+                current_state = new_state
+                time.sleep(2)
+            
+        return t 
 
 
