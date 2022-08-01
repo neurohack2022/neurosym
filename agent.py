@@ -133,11 +133,11 @@ class Conducter():
                     slider=driver.find_element("id", "s"+str(sliderno))
                     ac = ActionChains(driver)
                     if(increase):
-                        slideroffset[sliderno]-=10
+                        slideroffset[sliderno]-=20
                         if(slideroffset[sliderno]<=-50):
                             slideroffset[sliderno]= -50                       
                     else:
-                        slideroffset[sliderno]+=10
+                        slideroffset[sliderno]+=20
                         if(slideroffset[sliderno]>=50):
                             slideroffset[sliderno]=50                      
 
