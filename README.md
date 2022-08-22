@@ -1,6 +1,6 @@
-# NATHacks 2022 - Python Boiler
+# NeuroSymphony installation guide
 
-This is a collection of tools created to help jumpstart users on working with BCI hardware.
+
 
 
 ## Installation
