@@ -16,8 +16,8 @@ This is a collection of tools created to help jumpstart users on working with BC
 
 Clone the repository:
 ```sh
-git clone https://github.com/neuralbertatech/natHACKS_2022_Python_Boiler
-cd natHACKS_2022_Python_Boiler
+git clone https://github.com/neurohack2022/neurosym
+cd neurosym
 ```
 
 Create a virtual environment to install the dependencies:
